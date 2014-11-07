@@ -1,0 +1,3 @@
+services:
+    walls_dto.extjs:
+        class: Walls\DtoBundle\Service\Extjs\ExtjsDtoHandler
