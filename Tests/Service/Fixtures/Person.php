@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * Copyright 2014 Tee Tanawatanakul <wallsfantasy@gmail.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,15 +16,17 @@
  * limitations under the License.
  */
 
+namespace Walls\DtoBundle\Tests\Fixtures;
+
 class Person
 {
     private $name;
-    
+
     public function setName($name)
     {
         $this->name = $name;
     }
-    
+
     public function getName()
     {
         return $this->name;
