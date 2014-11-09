@@ -108,6 +108,16 @@ class ExtjsDto implements DtoInterface
             $this->success = (bool) $bool;
         }
     }
+    
+    /**
+     * Is success flag
+     * 
+     * @param boolean|null
+     */
+    public function isSuccess()
+    {
+        return $this->success;
+    }
 
     /**
      * Set message
@@ -117,6 +127,16 @@ class ExtjsDto implements DtoInterface
     public function setMessage($message)
     {
         $this->message = $message;
+    }
+    
+    /**
+     * Get message
+     * 
+     * @param string|null
+     */
+    public function getMessage()
+    {
+        return $this->message;
     }
 
     /**
@@ -148,6 +168,16 @@ class ExtjsDto implements DtoInterface
             array_push($this->data, $data);
             $this->total = $this->total + 1;
         }
+    }
+    
+    /**
+     * Get data
+     * 
+     * @return mixed[]|null
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 
     /**
