@@ -16,6 +16,7 @@ class ExtjsDto implements DtoInterface
 {
     /**
      * Success flag
+     * 
      * @access private
      * @var boolean|null
      */
@@ -23,6 +24,7 @@ class ExtjsDto implements DtoInterface
 
     /**
      * Message
+     * 
      * @access private
      * @var string|null
      */
@@ -30,6 +32,7 @@ class ExtjsDto implements DtoInterface
 
     /**
      * Error description
+     * 
      * @access private
      * @var array|null
      */
@@ -37,6 +40,7 @@ class ExtjsDto implements DtoInterface
 
     /**
      * Total number of entity
+     * 
      * @access private
      * @var integer|null
      */
@@ -44,8 +48,9 @@ class ExtjsDto implements DtoInterface
 
     /**
      * Data (entity) to send
+     * 
      * @access private
-     * @var object[]|null
+     * @var mixed[]|null
      */
     private $data;
 
@@ -92,6 +97,7 @@ class ExtjsDto implements DtoInterface
 
     /**
      * Set success flag
+     * 
      * @param boolean|null $bool
      */
     public function setSuccess($bool)
@@ -102,19 +108,41 @@ class ExtjsDto implements DtoInterface
             $this->success = (bool) $bool;
         }
     }
+    
+    /**
+     * Is success flag
+     * 
+     * @param boolean|null
+     */
+    public function isSuccess()
+    {
+        return $this->success;
+    }
 
     /**
      * Set message
+     * 
      * @param string|null $message
      */
     public function setMessage($message)
     {
         $this->message = $message;
     }
+    
+    /**
+     * Get message
+     * 
+     * @param string|null
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
 
     /**
      * Set data
-     * @param object[]|null $data
+     * 
+     * @param mixed[]|null $data
      */
     public function setData($data)
     {
@@ -129,7 +157,8 @@ class ExtjsDto implements DtoInterface
 
     /**
      * Add data
-     * @param object $data
+     * 
+     * @param mixed $data
      */
     public function addData($data)
     {
@@ -140,9 +169,20 @@ class ExtjsDto implements DtoInterface
             $this->total = $this->total + 1;
         }
     }
+    
+    /**
+     * Get data
+     * 
+     * @return mixed[]|null
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
 
     /**
      * Set number of entities
+     * 
      * @param integer|null $total
      */
     public function setTotal($total)
@@ -156,6 +196,7 @@ class ExtjsDto implements DtoInterface
 
     /**
      * Get number of entities
+     * 
      * @return integer
      */
     public function getTotal()
@@ -165,6 +206,7 @@ class ExtjsDto implements DtoInterface
 
     /**
      * Set exception
+     * 
      * @param \Exception $exception
      */
     public function setException(\Exception $exception)
@@ -173,7 +215,6 @@ class ExtjsDto implements DtoInterface
         $this->error['code']  = $exception->getCode();
         $this->error['file']  = $exception->getFile();
         $this->error['line']  = $exception->getLine();
-        //$this->error['trace'] = $exception->getTrace();
     }
 
 }
