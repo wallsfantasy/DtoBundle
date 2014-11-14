@@ -72,37 +72,6 @@ class ExtjsDtoHandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Walls\DtoBundle\Service\Extjs\ExtjsDtoHandler::wrapData
-     */
-    public function testWrapDataAutoCountOneDatum()
-    {
-        $data = new Person('Me');
-
-        $dto = $this->handler->wrapData($data);
-
-        $expected = 1;
-        $actual   = $dto->getTotal();
-
-        $this->assertSame($expected, $actual);
-    }
-
-    /**
-     * @covers Walls\DtoBundle\Service\Extjs\ExtjsDtoHandler::wrapData
-     */
-    public function testWrapDataAutoCountManyData()
-    {
-        $person = new Person('Me');
-        $data   = array($person, $person, $person);
-
-        $dto = $this->handler->wrapData($data);
-
-        $expected = 3;
-        $actual   = $dto->getTotal();
-
-        $this->assertSame($expected, $actual);
-    }
-
-    /**
      * @covers Walls\DtoBundle\Service\Extjs\ExtjsDtoHandler::wrapMessage
      */
     public function testWrapMessage()
