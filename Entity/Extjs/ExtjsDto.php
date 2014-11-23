@@ -31,14 +31,6 @@ class ExtjsDto implements DtoInterface
     private $message;
 
     /**
-     * Error description
-     * 
-     * @access private
-     * @var array|null
-     */
-    private $error;
-
-    /**
      * Total number of entity
      * 
      * @access private
@@ -53,6 +45,30 @@ class ExtjsDto implements DtoInterface
      * @var mixed[]|null
      */
     private $data;
+
+    /**
+     * Error description
+     * 
+     * @access private
+     * @var array|null
+     */
+    private $error;
+
+    /**
+     * Stack trace
+     * 
+     * @access private
+     * @var array|null
+     */
+    private $traces;
+    
+    /**
+     * Previous exception
+     * 
+     * @access private
+     * @var array|null
+     */
+    private $prevException;
 
     /**
      * Constructor
@@ -85,7 +101,7 @@ class ExtjsDto implements DtoInterface
         // force $total to becomes integer or null
         if ($total === null) {
             // auto total
-            if($this->data === null) {
+            if ($this->data === null) {
                 $this->total = null;
             } else {
                 $this->total = count($this->data);
@@ -108,7 +124,7 @@ class ExtjsDto implements DtoInterface
             $this->success = (bool) $bool;
         }
     }
-    
+
     /**
      * Is success flag
      * 
@@ -128,7 +144,7 @@ class ExtjsDto implements DtoInterface
     {
         $this->message = $message;
     }
-    
+
     /**
      * Get message
      * 
@@ -147,10 +163,10 @@ class ExtjsDto implements DtoInterface
     public function setData($data)
     {
         if ($data === null | is_array($data)) {
-            $this->data = $data;
+            $this->data  = $data;
             $this->total = count($data);
         } else {
-            $this->data = array($data);
+            $this->data  = array($data);
             $this->total = 1;
         }
     }
@@ -169,7 +185,7 @@ class ExtjsDto implements DtoInterface
             $this->total = $this->total + 1;
         }
     }
-    
+
     /**
      * Get data
      * 
@@ -187,7 +203,7 @@ class ExtjsDto implements DtoInterface
      */
     public function setTotal($total)
     {
-        if($total === null) {
+        if ($total === null) {
             $this->total = null;
         } else {
             $this->total = (int) $total;
@@ -211,10 +227,27 @@ class ExtjsDto implements DtoInterface
      */
     public function setException(\Exception $exception)
     {
-        $this->message        = $exception->getMessage();
-        $this->error['code']  = $exception->getCode();
-        $this->error['file']  = $exception->getFile();
-        $this->error['line']  = $exception->getLine();
+        $this->message       = $exception->getMessage();
+        $this->error['code'] = $exception->getCode();
+        $this->error['file'] = $exception->getFile();
+        $this->error['line'] = $exception->getLine();
+        
+        $traces = $exception->getTrace();
+        $length = count($traces);
+        $elements = ['file', 'line', 'function', 'class', 'type'];
+        for ($i = 0; $i < $length; $i++) {
+            foreach ($elements as $key) {
+                if(isset($traces[$i][$key])) {
+                    $this->traces[$i][$key] = $traces[$i][$key];
+                }
+            }
+        }
+        
+        $previous = $exception->getPrevious();
+        $this->prevException['class'] = get_class($previous);
+        $this->prevException['message'] = $previous->getMessage();
+        $this->prevException['code'] = $previous->getCode();
+        $this->prevException['file'] = $previous->getFile();
+        $this->prevException['line'] = $previous->getLine();
     }
-
 }
