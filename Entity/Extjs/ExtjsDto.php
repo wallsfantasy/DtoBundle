@@ -244,10 +244,12 @@ class ExtjsDto implements DtoInterface
         }
         
         $previous = $exception->getPrevious();
-        $this->prevException['class'] = get_class($previous);
-        $this->prevException['message'] = $previous->getMessage();
-        $this->prevException['code'] = $previous->getCode();
-        $this->prevException['file'] = $previous->getFile();
-        $this->prevException['line'] = $previous->getLine();
+        if($previous !== null) {
+            $this->prevException['class'] = get_class($previous);
+            $this->prevException['message'] = $previous->getMessage();
+            $this->prevException['code'] = $previous->getCode();
+            $this->prevException['file'] = $previous->getFile();
+            $this->prevException['line'] = $previous->getLine();
+        }
     }
 }
